@@ -119,7 +119,7 @@
             white-space: pre-line;
         }
 
-        /* --- ESTILO DE BOTÓN IGUAL A TU CAPTURA --- */
+        /* --- ESTILO DE BOTÓN DE REPRODUCCIÓN --- */
         .boton-reproductor {
             background: linear-gradient(to right, #400a11, #1d0306);
             color: white;
@@ -144,6 +144,75 @@
 
         .icono-play {
             font-size: 14px;
+        }
+
+        /* --- NUEVA SECCIÓN: CARRETERA PARA EL AMOR DE MI VIDA --- */
+        .contenedor-carretera {
+            background: var(--color-crema-rosa);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed var(--color-vino-claro);
+            margin-top: 25px;
+        }
+
+        .titulo-carretera {
+            color: var(--color-vino);
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--color-vino);
+            padding-bottom: 8px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .bloque-imagen {
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #d9c5c7;
+        }
+
+        .bloque-imagen:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 15px;
+        }
+
+        .imagen-proyecto {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .dedicatoria-imagen {
+            color: #444444;
+            font-size: 14.5px;
+            line-height: 1.5;
+            font-style: italic;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            text-align: left;
+        }
+
+        .texto-broma {
+            color: var(--color-negro);
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: left;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--color-vino-claro);
+            margin-top: 15px;
+            font-weight: 500;
         }
 
         .firma {
@@ -178,7 +247,7 @@ Espero de corazón que estés bien. Cuando quieras hablar, aquí voy a estar.
 
 Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo mejor para ti.</div>
 
-        <!-- SECCIÓN DE BOTONES INALTERABLES -->
+        <!-- SECCIÓN DE BOTONES DE MÚSICA INALTERABLES -->
         <div class="contenedor-musica">
             <div class="titulo-musica">"-7 canciones para dedicar( de hecho son mas pero ahora estoy contabilizando) AJAJAJAJ"</div>
             
@@ -209,7 +278,7 @@ Todo esto es nuevo para mí. Nunca había querido construir algo tan en serio co
 
 Tal vez suene un poco tonto, pero hasta me pongo a ver videos de psicología en TikTok jajaja. Hay una cuenta que sigo mucho(psialap) porque quiero entenderme mejor, aprender a comunicarme mejor y dejar atrás cosas que sé que debo cambiar. No lo hago porque alguien me obligue; lo hago porque quiero ser una mejor persona y porque sueño con tener un futuro contigo.
 
-No pretendo que pienses que soy perfecto, porque no lo soy. Solo quiero que veas el esfuerzo que estoy haciendo. Hay días en los que tengo miedo de equivocarme, miedo de decir algo que no debía o de perderte por no saber expresar lo que siento. Aun así, sigo intentándolo porque para mí tú vales ese esfuerzo.
+No pretendo que pienses que soy perfecto, porque no lo soy. Solo quiero que que veas el esfuerzo que estoy haciendo. Hay días en los que tengo miedo de equivocarme, miedo de decir algo que no debía o de perderte por no saber expresar lo que siento. Aun así, sigo intentándolo porque para mí tú vales ese esfuerzo.
 
 También me identifico con esa idea de intentar ser mejor que ayer. No porque alguien me lo exija, sino porque quiero crecer como persona. Quiero aprender a comunicarme mejor, a manejar mis inseguridades y a no dejar que mis miedos dañen algo tan bonito como lo que siento por ti.
 
@@ -223,18 +292,36 @@ Solo quería que supieras eso.</div>
             </div>
         </div>
 
+        <!-- NUEVA SECCIÓN DE IMÁGENES DE CARRETERA -->
+        <div class="contenedor-carretera">
+            <div class="titulo-carretera">🚧 UNA CARRETERA PARA EL AMOR DE MI VIDA 🚧</div>
+            
+            <!-- IMAGEN 1 -->
+            <div class="bloque-imagen">
+                <img src="imagen1.jpg" alt="Carretera 1" class="imagen-proyecto">
+                <div class="dedicatoria-imagen">"Una carretera bien diseñada conecta destinos; tú conectaste mi presente con el futuro que quiero construir."</div>
+            </div>
+
+            <!-- IMAGEN 2 -->
+            <div class="bloque-imagen">
+                <img src="imagen2.jpg" alt="Carretera 2" class="imagen-proyecto">
+                <div class="dedicatoria-imagen">"Entre todas las secciones transversales que he dibujado, la única que de verdad quiero estudiar es el camino que me lleva a tu corazón."</div>
+            </div>
+
+            <!-- MENSAJE FINAL DE LA SECCIÓN -->
+            <div class="texto-broma">si lo hice jajajaj te paso el documneto ok no JJAJAJAJA y bueno wendy decirte que de verdad te amo mucho mi amor....</div>
+        </div>
+
         <div class="firma">Con amor, Leonardo</div>
     </div>
 
     <script>
-        // Diccionario para registrar si los audios ya se inicializaron en su segundo correspondiente
         const estadosIniciales = {};
 
         function controlarAudio(idAudio, tiempoInicio, tiempoFin) {
             const audio = document.getElementById(idAudio);
             const icono = document.getElementById('icono-' + idAudio);
 
-            // Pausar cualquier otro audio que esté sonando
             document.querySelectorAll('audio').forEach(aud => {
                 if (aud.id !== idAudio && !aud.paused) {
                     aud.pause();
@@ -243,7 +330,6 @@ Solo quería que supieras eso.</div>
             });
 
             if (audio.paused) {
-                // Si nunca ha empezado a sonar, lo forzamos a ir al segundo indicado
                 if (!estadosIniciales[idAudio]) {
                     audio.currentTime = tiempoInicio;
                     estadosIniciales[idAudio] = true;
@@ -255,7 +341,6 @@ Solo quería que supieras eso.</div>
                 icono.innerText = '▶';
             }
 
-            // Monitorear el tiempo para que no se pase del límite
             audio.ontimeupdate = () => {
                 if (audio.currentTime < tiempoInicio) {
                     audio.currentTime = tiempoInicio;
@@ -264,7 +349,7 @@ Solo quería que supieras eso.</div>
                     audio.pause();
                     audio.currentTime = tiempoInicio;
                     icono.innerText = '▶';
-                    estadosIniciales[idAudio] = false; // Permite reiniciar el ciclo si da play otra vez
+                    estadosIniciales[idAudio] = false;
                 }
             };
         }
