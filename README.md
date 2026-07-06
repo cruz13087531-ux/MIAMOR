@@ -84,12 +84,13 @@
         .titulo-musica {
             color: var(--color-vino);
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
             margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             border-bottom: 2px solid var(--color-vino);
             padding-bottom: 8px;
+            line-height: 1.4;
+            text-align: center;
         }
 
         .bloque-cancion {
@@ -125,11 +126,20 @@
             padding: 12px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            white-space: pre-line;
         }
 
+        /* Ocultar elementos de duración del reproductor nativo */
         audio {
             width: 100%;
             margin-top: 5px;
+        }
+
+        audio::-webkit-media-controls-time-remaining-display {
+            display: none !important;
+        }
+        audio::-webkit-media-controls-current-time-display {
+            display: none !important;
         }
 
         .firma {
@@ -164,22 +174,42 @@ Espero de corazón que estés bien. Cuando quieras hablar, aquí voy a estar.
 
 Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo mejor para ti.</div>
 
-        <!-- REPRODUCTORES MISTERIOSOS -->
+        <!-- SECCIÓN DE REPRODUCTORES CON CONFIGURACIONES AVANZADAS -->
         <div class="contenedor-musica">
-            <div class="titulo-musica">🎵 7 canciones por dedicar</div>
+            <div class="titulo-musica">"-7 canciones para dedicar( de hecho son mas pero ahora estoy contabilizando) AJAJAJAJ"</div>
             
-            <!-- CANCIÓN 6 (OCULTA) -->
+            <!-- CANCIÓN 6 -->
             <div class="bloque-cancion">
                 <div class="info-cancion">✨ Canción 6</div>
                 <div class="dedicatoria-cancion">"Yo me siento asi contigo mi amor y tu lo sabes es una de la primeras canciones que te dedique pero enserio gracias mi amor por estar en mi vida, y por hacerme cambiar la perspectiva en muchas cosas.."</div>
                 <audio id="audio6" controls src="cancion6.mp3"></audio>
             </div>
 
-            <!-- CANCIÓN 7 (OCULTA) -->
+            <!-- CANCIÓN 7 -->
             <div class="bloque-cancion">
                 <div class="info-cancion">✨ Canción 7</div>
                 <div class="dedicatoria-cancion">"Y hoy me siento asi escuchala de verdad es mi manera mas honesta de decir todo lo que quiero contigo"</div>
                 <audio id="audio7" controls src="cancion7.mp3"></audio>
+            </div>
+
+            <!-- CANCIÓN 8 (APARTADO DEPRE) -->
+            <div class="bloque-cancion">
+                <div class="info-cancion">🥀 así me siento de depre....</div>
+                <div class="dedicatoria-cancion">Y quiero que sepas algo más...
+Soy muy miedoso, tú lo sabes. Me pongo muy nervioso con todo esto y, aunque no siempre lo parezca, me cuesta muchísimo decirte cómo me siento. Abrirme de esta manera no es algo que me salga natural.
+
+Todo esto es nuevo para mí. Nunca había querido construir algo tan en serio con alguien y, muchas veces, no sé cuál es la forma correcta de reaccionar. Pero te juro que siempre intento pensar las cosas antes de actuar contigo. No tomo decisiones a la ligera, porque lo nuestro es demasiado importante para mí.
+
+Tal vez suene un poco tonto, pero hasta me pongo a ver videos de psicología en TikTok jajaja. Hay una cuenta que sigo mucho(psialap) porque quiero entenderme mejor, aprender a comunicarme mejor y dejar atrás cosas que sé que debo cambiar. No lo hago porque alguien me obligue; lo hago porque quiero ser una mejor persona y porque sueño con tener un futuro contigo.
+
+No pretendo que pienses que soy perfecto, porque no lo soy. Solo quiero que veas el esfuerzo que estoy haciendo. Hay días en los que tengo miedo de equivocarme, miedo de decir algo que no debía o de perderte por no saber expresar lo que siento. Aun así, sigo intentándolo porque para mí tú vales ese esfuerzo.
+
+También me identifico con esa idea de intentar ser mejor que ayer. No porque alguien me lo exija, sino porque quiero crecer como persona. Quiero aprender a comunicarme mejor, a manejar mis inseguridades y a no dejar que mis miedos dañen algo tan bonito como lo que siento por ti.
+
+No sabes cuánto me preparo antes de hablar contigo o antes de escribirte algo importante. A veces hasta ensayo en mi cabeza lo que quiero decir para no hacerlo mal jajaja. Puede sonar exagerado, pero es porque eres una de las personas más importantes que han llegado a mi vida y de verdad quiero cuidar lo que estamos construyendo.
+
+Solo quería que supieras eso.</div>
+                <audio id="audio8" controls src="cancion8.mp3"></audio>
             </div>
         </div>
 
@@ -187,7 +217,7 @@ Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo m
     </div>
 
     <script>
-        // Configuración para Canción 6: Inicia en 0:30 (30s) y termina en 3:00 (180s)
+        // Configuración Canción 6: Inicia en 0:30 (30s) y termina en 3:00 (180s)
         const audio6 = document.getElementById('audio6');
         let inicializado6 = false;
 
@@ -201,10 +231,12 @@ Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo m
         audio6.addEventListener('timeupdate', () => {
             if (audio6.currentTime >= 180) {
                 audio6.pause();
+                audio6.currentTime = 30; // Resetea al inicio asignado
+                inicializado6 = false;
             }
         });
 
-        // Configuración para Canción 7: Inicia en 0:45 (45s) y termina en 3:03 (183s)
+        // Configuración Canción 7: Inicia en 0:45 (45s) y termina en 3:03 (183s)
         const audio7 = document.getElementById('audio7');
         let inicializado7 = false;
 
@@ -218,6 +250,27 @@ Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo m
         audio7.addEventListener('timeupdate', () => {
             if (audio7.currentTime >= 183) {
                 audio7.pause();
+                audio7.currentTime = 45;
+                inicializado7 = false;
+            }
+        });
+
+        // Configuración Canción 8: Inicia en 3:16 (196s) y termina en 4:20 (260s)
+        const audio8 = document.getElementById('audio8');
+        let inicializado8 = false;
+
+        audio8.addEventListener('play', () => {
+            if (!inicializado8) {
+                audio8.currentTime = 196;
+                inicializado8 = true;
+            }
+        });
+
+        audio8.addEventListener('timeupdate', () => {
+            if (audio8.currentTime >= 260) {
+                audio8.pause();
+                audio8.currentTime = 196;
+                inicializado8 = false;
             }
         });
     </script>
