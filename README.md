@@ -129,7 +129,7 @@
             white-space: pre-line;
         }
 
-        /* Ocultar elementos de duración del reproductor nativo */
+        /* Ocultar elementos de duración y bloquear interacción manual */
         audio {
             width: 100%;
             margin-top: 5px;
@@ -140,6 +140,10 @@
         }
         audio::-webkit-media-controls-current-time-display {
             display: none !important;
+        }
+        /* Bloquea clicks en la línea de tiempo en navegadores modernos */
+        audio::-webkit-media-controls-timeline {
+            pointer-events: none !important;
         }
 
         .firma {
@@ -174,25 +178,21 @@ Espero de corazón que estés bien. Cuando quieras hablar, aquí voy a estar.
 
 Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo mejor para ti.</div>
 
-        <!-- SECCIÓN DE REPRODUCTORES CON CONFIGURACIONES AVANZADAS -->
         <div class="contenedor-musica">
             <div class="titulo-musica">"-7 canciones para dedicar( de hecho son mas pero ahora estoy contabilizando) AJAJAJAJ"</div>
             
-            <!-- CANCIÓN 6 -->
             <div class="bloque-cancion">
                 <div class="info-cancion">✨ Canción 6</div>
                 <div class="dedicatoria-cancion">"Yo me siento asi contigo mi amor y tu lo sabes es una de la primeras canciones que te dedique pero enserio gracias mi amor por estar en mi vida, y por hacerme cambiar la perspectiva en muchas cosas.."</div>
                 <audio id="audio6" controls src="cancion6.mp3"></audio>
             </div>
 
-            <!-- CANCIÓN 7 -->
             <div class="bloque-cancion">
                 <div class="info-cancion">✨ Canción 7</div>
                 <div class="dedicatoria-cancion">"Y hoy me siento asi escuchala de verdad es mi manera mas honesta de decir todo lo que quiero contigo"</div>
                 <audio id="audio7" controls src="cancion7.mp3"></audio>
             </div>
 
-            <!-- CANCIÓN 8 (APARTADO DEPRE) -->
             <div class="bloque-cancion">
                 <div class="info-cancion">🥀 así me siento de depre....</div>
                 <div class="dedicatoria-cancion">Y quiero que sepas algo más...
@@ -229,9 +229,14 @@ Solo quería que supieras eso.</div>
         });
 
         audio6.addEventListener('timeupdate', () => {
+            // Si intenta retroceder manualmente antes del segundo 30
+            if (audio6.currentTime < 30) {
+                audio6.currentTime = 30;
+            }
+            // Si llega al final establecido (3:00)
             if (audio6.currentTime >= 180) {
                 audio6.pause();
-                audio6.currentTime = 30; // Resetea al inicio asignado
+                audio6.currentTime = 30; 
                 inicializado6 = false;
             }
         });
@@ -248,6 +253,9 @@ Solo quería que supieras eso.</div>
         });
 
         audio7.addEventListener('timeupdate', () => {
+            if (audio7.currentTime < 45) {
+                audio7.currentTime = 45;
+            }
             if (audio7.currentTime >= 183) {
                 audio7.pause();
                 audio7.currentTime = 45;
@@ -267,6 +275,9 @@ Solo quería que supieras eso.</div>
         });
 
         audio8.addEventListener('timeupdate', () => {
+            if (audio8.currentTime < 196) {
+                audio8.currentTime = 196;
+            }
             if (audio8.currentTime >= 260) {
                 audio8.pause();
                 audio8.currentTime = 196;
