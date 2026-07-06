@@ -68,8 +68,65 @@
             padding: 25px;
             border-radius: 15px;
             border-left: 5px solid var(--color-vino);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* --- SECCIÓN DE MÚSICA --- */
+        .contenedor-musica {
+            background: var(--color-crema-rosa);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed var(--color-vino-claro);
+            margin-top: 20px;
+        }
+
+        .titulo-musica {
+            color: var(--color-vino);
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--color-vino);
+            padding-bottom: 8px;
+        }
+
+        .bloque-cancion {
+            margin-bottom: 25px;
+            text-align: left;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #d9c5c7;
+        }
+
+        .bloque-cancion:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .info-cancion {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--color-vino-oscuro);
+            margin-bottom: 5px;
+        }
+
+        .dedicatoria-cancion {
+            color: #444444;
+            font-size: 14.5px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            font-style: italic;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 5px;
         }
 
         .firma {
@@ -104,8 +161,62 @@ Espero de corazón que estés bien. Cuando quieras hablar, aquí voy a estar.
 
 Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo mejor para ti.</div>
 
+        <!-- REPRODUCTORES DE MÚSICA CON TIEMPOS CONFIGURADOS -->
+        <div class="contenedor-musica">
+            <div class="titulo-musica">🎵 Canciones para escuchar</div>
+            
+            <!-- CANCIÓN 6 -->
+            <div class="bloque-cancion">
+                <div class="info-cancion">1. Talismán - Rata Blanca</div>
+                <div class="dedicatoria-cancion">"Yo me siento asi contigo mi amor y tu lo sabes es una de la primeras canciones que te dedique pero enserio gracias mi amor por estar en mi vida, y por hacerme cambiar la perspectiva en muchas cosas.."</div>
+                <audio id="audio6" controls src="cancion6"></audio>
+            </div>
+
+            <!-- CANCIÓN 7 -->
+            <div class="bloque-cancion">
+                <div class="info-cancion">2. Necesito tu amor - Charly García</div>
+                <div class="dedicatoria-cancion">"Y hoy me siento asi escuchala de verdad es mi manera mas honesta de decir todo lo que quiero contigo"</div>
+                <audio id="audio7" controls src="cancion7"></audio>
+            </div>
+        </div>
+
         <div class="firma">Con amor, Leonardo</div>
     </div>
 
+    <script>
+        // Configuración para Canción 6: Inicia en 0:30 (30s) y termina en 3:00 (180s)
+        const audio6 = document.getElementById('audio6');
+        let inicializado6 = false;
+
+        audio6.addEventListener('play', () => {
+            if (!inicializado6) {
+                audio6.currentTime = 30;
+                inicializado6 = true;
+            }
+        });
+
+        audio6.addEventListener('timeupdate', () => {
+            if (audio6.currentTime >= 180) {
+                audio6.pause();
+            }
+        });
+
+        // Configuración para Canción 7: Inicia en 0:45 (45s) y termina en 3:03 (183s)
+        const audio7 = document.getElementById('audio7');
+        let inicializado7 = false;
+
+        audio7.addEventListener('play', () => {
+            if (!inicializado7) {
+                audio7.currentTime = 45;
+                inicializado7 = true;
+            }
+        });
+
+        audio7.addEventListener('timeupdate', () => {
+            if (audio7.currentTime >= 183) {
+                audio7.pause();
+            }
+        });
+    </script>
 </body>
 </html>
