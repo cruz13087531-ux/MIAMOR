@@ -72,7 +72,7 @@
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        /* --- SECCIÓN DE MÚSICA --- */
+        /* --- SECCIÓN DE MÚSICA MISTERIOSA --- */
         .contenedor-musica {
             background: var(--color-crema-rosa);
             padding: 20px;
@@ -110,6 +110,9 @@
             font-weight: bold;
             color: var(--color-vino-oscuro);
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .dedicatoria-cancion {
@@ -161,22 +164,22 @@ Espero de corazón que estés bien. Cuando quieras hablar, aquí voy a estar.
 
 Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo mejor para ti.</div>
 
-        <!-- REPRODUCTORES DE MÚSICA CON TIEMPOS CONFIGURADOS -->
+        <!-- REPRODUCTORES MISTERIOSOS -->
         <div class="contenedor-musica">
-            <div class="titulo-musica">🎵 Canciones para escuchar</div>
+            <div class="titulo-musica">🎵 7 canciones por dedicar</div>
             
-            <!-- CANCIÓN 6 -->
+            <!-- CANCIÓN 6 (OCULTA) -->
             <div class="bloque-cancion">
-                <div class="info-cancion">1. Talismán - Rata Blanca</div>
+                <div class="info-cancion">✨ Canción 6</div>
                 <div class="dedicatoria-cancion">"Yo me siento asi contigo mi amor y tu lo sabes es una de la primeras canciones que te dedique pero enserio gracias mi amor por estar en mi vida, y por hacerme cambiar la perspectiva en muchas cosas.."</div>
-                <audio id="audio6" controls src="cancion6"></audio>
+                <audio id="audio6" controls src="cancion6.mp3"></audio>
             </div>
 
-            <!-- CANCIÓN 7 -->
+            <!-- CANCIÓN 7 (OCULTA) -->
             <div class="bloque-cancion">
-                <div class="info-cancion">2. Necesito tu amor - Charly García</div>
+                <div class="info-cancion">✨ Canción 7</div>
                 <div class="dedicatoria-cancion">"Y hoy me siento asi escuchala de verdad es mi manera mas honesta de decir todo lo que quiero contigo"</div>
-                <audio id="audio7" controls src="cancion7"></audio>
+                <audio id="audio7" controls src="cancion7.mp3"></audio>
             </div>
         </div>
 
