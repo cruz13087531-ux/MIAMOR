@@ -106,21 +106,11 @@
             margin-bottom: 0;
         }
 
-        .info-cancion {
-            font-size: 15px;
-            font-weight: bold;
-            color: var(--color-vino-oscuro);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
         .dedicatoria-cancion {
             color: #444444;
             font-size: 14.5px;
             line-height: 1.5;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-style: italic;
             background: #ffffff;
             padding: 12px;
@@ -129,21 +119,31 @@
             white-space: pre-line;
         }
 
-        /* Ocultar elementos de duración y bloquear interacción manual */
-        audio {
+        /* --- ESTILO DE BOTÓN IGUAL A TU CAPTURA --- */
+        .boton-reproductor {
+            background: linear-gradient(to right, #400a11, #1d0306);
+            color: white;
+            border: none;
             width: 100%;
-            margin-top: 5px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background 0.3s ease;
         }
 
-        audio::-webkit-media-controls-time-remaining-display {
-            display: none !important;
+        .boton-reproductor:hover {
+            background: linear-gradient(to right, #500f17, #2c050b);
         }
-        audio::-webkit-media-controls-current-time-display {
-            display: none !important;
-        }
-        /* Bloquea clicks en la línea de tiempo en navegadores modernos */
-        audio::-webkit-media-controls-timeline {
-            pointer-events: none !important;
+
+        .icono-play {
+            font-size: 14px;
         }
 
         .firma {
@@ -178,23 +178,30 @@ Espero de corazón que estés bien. Cuando quieras hablar, aquí voy a estar.
 
 Y, por favor, nunca dudes de esto: te amo muchísimo y siempre voy a desear lo mejor para ti.</div>
 
+        <!-- SECCIÓN DE BOTONES INALTERABLES -->
         <div class="contenedor-musica">
             <div class="titulo-musica">"-7 canciones para dedicar( de hecho son mas pero ahora estoy contabilizando) AJAJAJAJ"</div>
             
+            <!-- CANCIÓN 6 -->
             <div class="bloque-cancion">
-                <div class="info-cancion">✨ Canción 6</div>
                 <div class="dedicatoria-cancion">"Yo me siento asi contigo mi amor y tu lo sabes es una de la primeras canciones que te dedique pero enserio gracias mi amor por estar en mi vida, y por hacerme cambiar la perspectiva en muchas cosas.."</div>
-                <audio id="audio6" controls src="cancion6.mp3"></audio>
+                <audio id="audio6" src="cancion6.mp3"></audio>
+                <button class="boton-reproductor" onclick="controlarAudio('audio6', 30, 180)">
+                    <span class="icono-play" id="icono-audio6">▶</span> <span id="texto-audio6">Canción 6</span>
+                </button>
             </div>
 
+            <!-- CANCIÓN 7 -->
             <div class="bloque-cancion">
-                <div class="info-cancion">✨ Canción 7</div>
                 <div class="dedicatoria-cancion">"Y hoy me siento asi escuchala de verdad es mi manera mas honesta de decir todo lo que quiero contigo"</div>
-                <audio id="audio7" controls src="cancion7.mp3"></audio>
+                <audio id="audio7" src="cancion7.mp3"></audio>
+                <button class="boton-reproductor" onclick="controlarAudio('audio7', 45, 183)">
+                    <span class="icono-play" id="icono-audio7">▶</span> <span id="texto-audio7">Canción 7</span>
+                </button>
             </div>
 
+            <!-- CANCIÓN 8 (APARTADO DEPRE) -->
             <div class="bloque-cancion">
-                <div class="info-cancion">🥀 así me siento de depre....</div>
                 <div class="dedicatoria-cancion">Y quiero que sepas algo más...
 Soy muy miedoso, tú lo sabes. Me pongo muy nervioso con todo esto y, aunque no siempre lo parezca, me cuesta muchísimo decirte cómo me siento. Abrirme de esta manera no es algo que me salga natural.
 
@@ -209,7 +216,10 @@ También me identifico con esa idea de intentar ser mejor que ayer. No porque al
 No sabes cuánto me preparo antes de hablar contigo o antes de escribirte algo importante. A veces hasta ensayo en mi cabeza lo que quiero decir para no hacerlo mal jajaja. Puede sonar exagerado, pero es porque eres una de las personas más importantes que han llegado a mi vida y de verdad quiero cuidar lo que estamos construyendo.
 
 Solo quería que supieras eso.</div>
-                <audio id="audio8" controls src="cancion8.mp3"></audio>
+                <audio id="audio8" src="cancion8.mp3"></audio>
+                <button class="boton-reproductor" onclick="controlarAudio('audio8', 196, 260)">
+                    <span class="icono-play" id="icono-audio8">▶</span> <span id="texto-audio8">así me siento de depre....</span>
+                </button>
             </div>
         </div>
 
@@ -217,73 +227,47 @@ Solo quería que supieras eso.</div>
     </div>
 
     <script>
-        // Configuración Canción 6: Inicia en 0:30 (30s) y termina en 3:00 (180s)
-        const audio6 = document.getElementById('audio6');
-        let inicializado6 = false;
+        // Diccionario para registrar si los audios ya se inicializaron en su segundo correspondiente
+        const estadosIniciales = {};
 
-        audio6.addEventListener('play', () => {
-            if (!inicializado6) {
-                audio6.currentTime = 30;
-                inicializado6 = true;
-            }
-        });
+        function controlarAudio(idAudio, tiempoInicio, tiempoFin) {
+            const audio = document.getElementById(idAudio);
+            const icono = document.getElementById('icono-' + idAudio);
 
-        audio6.addEventListener('timeupdate', () => {
-            // Si intenta retroceder manualmente antes del segundo 30
-            if (audio6.currentTime < 30) {
-                audio6.currentTime = 30;
-            }
-            // Si llega al final establecido (3:00)
-            if (audio6.currentTime >= 180) {
-                audio6.pause();
-                audio6.currentTime = 30; 
-                inicializado6 = false;
-            }
-        });
+            // Pausar cualquier otro audio que esté sonando
+            document.querySelectorAll('audio').forEach(aud => {
+                if (aud.id !== idAudio && !aud.paused) {
+                    aud.pause();
+                    document.getElementById('icono-' + aud.id).innerText = '▶';
+                }
+            });
 
-        // Configuración Canción 7: Inicia en 0:45 (45s) y termina en 3:03 (183s)
-        const audio7 = document.getElementById('audio7');
-        let inicializado7 = false;
+            if (audio.paused) {
+                // Si nunca ha empezado a sonar, lo forzamos a ir al segundo indicado
+                if (!estadosIniciales[idAudio]) {
+                    audio.currentTime = tiempoInicio;
+                    estadosIniciales[idAudio] = true;
+                }
+                audio.play();
+                icono.innerText = '⏸';
+            } else {
+                audio.pause();
+                icono.innerText = '▶';
+            }
 
-        audio7.addEventListener('play', () => {
-            if (!inicializado7) {
-                audio7.currentTime = 45;
-                inicializado7 = true;
-            }
-        });
-
-        audio7.addEventListener('timeupdate', () => {
-            if (audio7.currentTime < 45) {
-                audio7.currentTime = 45;
-            }
-            if (audio7.currentTime >= 183) {
-                audio7.pause();
-                audio7.currentTime = 45;
-                inicializado7 = false;
-            }
-        });
-
-        // Configuración Canción 8: Inicia en 3:16 (196s) y termina en 4:20 (260s)
-        const audio8 = document.getElementById('audio8');
-        let inicializado8 = false;
-
-        audio8.addEventListener('play', () => {
-            if (!inicializado8) {
-                audio8.currentTime = 196;
-                inicializado8 = true;
-            }
-        });
-
-        audio8.addEventListener('timeupdate', () => {
-            if (audio8.currentTime < 196) {
-                audio8.currentTime = 196;
-            }
-            if (audio8.currentTime >= 260) {
-                audio8.pause();
-                audio8.currentTime = 196;
-                inicializado8 = false;
-            }
-        });
+            // Monitorear el tiempo para que no se pase del límite
+            audio.ontimeupdate = () => {
+                if (audio.currentTime < tiempoInicio) {
+                    audio.currentTime = tiempoInicio;
+                }
+                if (audio.currentTime >= tiempoFin) {
+                    audio.pause();
+                    audio.currentTime = tiempoInicio;
+                    icono.innerText = '▶';
+                    estadosIniciales[idAudio] = false; // Permite reiniciar el ciclo si da play otra vez
+                }
+            };
+        }
     </script>
 </body>
 </html>
